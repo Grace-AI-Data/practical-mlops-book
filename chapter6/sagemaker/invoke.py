@@ -12,7 +12,9 @@ predictor = Predictor(
 
 # get a subset of test data for a quick test
 #!head -120 test_data/test-dataset-input-cols.csv > test_data/test_sample.csv
-print("Sending test traffic to the endpoint {}. \nPlease wait...".format(endpoint_name))
+print(
+    f"Sending test traffic to the endpoint {endpoint_name}. \nPlease wait..."
+)
 
 with open("test_data/test_sample.csv", "r") as f:
     for row in f:

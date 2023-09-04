@@ -13,19 +13,12 @@ def carriage_returns(df):
 
 
 def unnamed_columns(df):
-    bad_columns = []
-    for key in df.keys():
-        if "Unnamed" in key:
-            bad_columns.append(key)
+    bad_columns = [key for key in df.keys() if "Unnamed" in key]
     return len(bad_columns)
 
 
 def zero_count_columns(df):
-    bad_columns = []
-    for key in df.keys():
-        if df[key].count() == 0:
-            bad_columns.append(key)
-    return bad_columns
+    return [key for key in df.keys() if df[key].count() == 0]
 
 
 @click.command()
@@ -34,11 +27,9 @@ def main(filename):
     df = pd.read_csv(filename)
     for column in zero_count_columns(df):
         click.echo(f"Warning: Column '{column}' has no items in it")
-    unnamed = unnamed_columns(df)
-    if unnamed:
+    if unnamed := unnamed_columns(df):
         click.echo(f"Warning: found {unnamed} columns that are Unnamed")
-    carriage_field = carriage_returns(df)
-    if carriage_field:
+    if carriage_field := carriage_returns(df):
         index, column, field = carriage_field
         click.echo((
            f"Warning: found carriage returns at index {index}"

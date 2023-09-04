@@ -10,16 +10,9 @@ def carriage_returns(df):
 
 
 def unnamed_columns(df):
-    bad_columns = []
-    for key in df.keys():
-        if "Unnamed" in key:
-            bad_columns.append(key)
+    bad_columns = [key for key in df.keys() if "Unnamed" in key]
     return len(bad_columns)
 
 
 def zero_count_columns(df):
-    bad_columns = []
-    for key in df.keys():
-        if df[key].count() == 0:
-            bad_columns.append(key)
-    return bad_columns
+    return [key for key in df.keys() if df[key].count() == 0]
