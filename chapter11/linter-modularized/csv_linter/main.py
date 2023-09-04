@@ -35,11 +35,9 @@ def main(filename):
     df = pd.read_csv(filename)
     for column in zero_count_columns(df):
         click.echo(f"Warning: Column '{column}' has no items in it")
-    unnamed = unnamed_columns(df)
-    if unnamed:
+    if unnamed := unnamed_columns(df):
         click.echo(f"Warning: found {unnamed} columns that are Unnamed")
-    carriage_field = carriage_returns(df)
-    if carriage_field:
+    if carriage_field := carriage_returns(df):
         index, column, field = carriage_field
         click.echo((
            f"Warning: found carriage returns at index {index}"

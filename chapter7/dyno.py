@@ -16,7 +16,7 @@ def query_police_department_record_by_guid(guid):
     extra_msg = {"region_name": REGION, "aws_service": "dynamodb", 
         "police_department_table":POLICE_DEPARTMENTS_TABLE,
         "guid":guid}
-    log.info(f"Get PD record by GUID", extra=extra_msg)
+    log.info("Get PD record by GUID", extra=extra_msg)
     pd_table = db.Table(POLICE_DEPARTMENTS_TABLE)
     response = pd_table.get_item(
         Key={

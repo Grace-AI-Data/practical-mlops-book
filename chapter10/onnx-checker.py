@@ -2,12 +2,12 @@ import sys
 import onnx
 
 def main(arguments):
-    help_menu = """
+    if "--help" in arguments:
+        help_menu = """
     A command-line tool to quickly verify ONNX models using
     check_model()
     """
 
-    if "--help" in arguments:
         print(help_menu)
         sys.exit(0)
 
